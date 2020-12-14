@@ -1,5 +1,7 @@
 import { Grommet, Box } from "grommet";
 
+import Landing from "./Landing"
+
 const theme = {
   global: {
     font: {
@@ -14,10 +16,9 @@ function App() {
   return (
     <Grommet theme={theme} full>
       <Box fill>
-        <Box flex>Home</Box>
-        <Box flex>Input</Box>
-        <Box flex>Result</Box>
-        <Box flex>Selection Details</Box>
+        <Box><Landing /></Box>
+        <Box>Result</Box>
+        <Box>Selection Details</Box>
       </Box>
     </Grommet>
   );

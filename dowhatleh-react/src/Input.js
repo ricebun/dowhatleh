@@ -1,11 +1,8 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 import { Box, Text, Select } from "grommet";
 
-const Input = () => {
-    const [party, setParty] = useState("")
-    const [avoid, setAvoid] = useState("")
-
+const Input = (props) => {
     const handleSelection = (e, setter) => {
         console.log(e)
         setter(e.value)
@@ -21,9 +18,9 @@ const Input = () => {
                     <Text>Who's Coming?</Text>
                     <Box>
                         <Select
-                            options={["My partner and I", "Friends", "Family", "Just Me"]}
-                            value={party}
-                            onChange={(e) => handleSelection(e, setParty)}
+                            options={["My Partner and I", "Friends", "Family", "Just Me"]}
+                            value={props.party}
+                            onChange={(e) => handleSelection(e, props.setParty)}
                             placeholder="Who's coming?"
                         />
                     </Box>
@@ -32,9 +29,9 @@ const Input = () => {
                     pad="small">
                     <Text>Things you don't want to do</Text>
                     <Select
-                        options={["History & Culture", "Adventure", "Leisure & Recreation", "Nature & Wildlife", "Sightseeing", "Others"]}
-                        value={avoid}
-                        onChange={(e) => handleSelection(e, setAvoid)}
+                        options={["History & Culture", "Adventure", "Leisure & Recreation", "Nature & Wildlife", "Sightseeing", "See & Do"]}
+                        value={props.avoid}
+                        onChange={(e) => handleSelection(e, props.setAvoid)}
                         placeholder="Things you don't want to do"
                         multiple
                     />

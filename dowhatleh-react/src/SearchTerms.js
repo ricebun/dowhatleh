@@ -12,7 +12,7 @@ const categories = {
 
     "Nature": ["Ecotourism", "Nature", "Wildlife"],
 
-    "Culture and Heritage": ["Culture", "Heritage", "History", "Museums"]
+    "Culture and Heritage": ["Culture", "Heritage", "History", "Museums", "Peranakan"]
 }
 
 const weather = ["Indoors", "Outdoors"]

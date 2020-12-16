@@ -3,7 +3,7 @@ import { Grommet, Box } from "grommet";
 
 import Landing from "./Landing"
 import Search from "./Search"
-import ShowResults from './ShowResults';
+import ShowResults from './ShowResults'
 
 const theme = {
   global: {
@@ -26,12 +26,10 @@ const App = () => {
     <>
       <Grommet theme={theme} full>
         <Box fill>
-          <Box>{submitStatus ? <ShowResults searchResults={searchResults} searchComplete={searchComplete} /> : <Landing party={party} setParty={setParty} avoid={avoid} setAvoid={setAvoid} submitStatus={submitStatus} setSubmitStatus={setSubmitStatus} />}</Box>
-          {/* <Box>{searchComplete ? <ShowResults searchResults={searchResults} /> : ""}</Box> */}
-          {/* <Box>Selection Details</Box> */}
+          <Box>{submitStatus ? <ShowResults searchResults={searchResults} searchComplete={searchComplete} submitStatus={submitStatus} setSubmitStatus={setSubmitStatus} setParty={setParty} setAvoid={setAvoid} /> : <Landing party={party} setParty={setParty} avoid={avoid} setAvoid={setAvoid} submitStatus={submitStatus} setSubmitStatus={setSubmitStatus} />}</Box>
         </Box>
       </Grommet>
-      {submitStatus ? <Search party={party} searchResults={searchResults} setSearchResults={setSearchResults} setSearchComplete={setSearchComplete} /> : ""}
+      {submitStatus ? <Search party={party} searchResults={searchResults} setSearchResults={setSearchResults} setSearchComplete={setSearchComplete} submitStatus={submitStatus} /> : ""}
     </>
   );
 }

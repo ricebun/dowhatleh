@@ -10,7 +10,7 @@ const party = {
 
 const cleanResponse = (obj) => {
     const nearestMrtStation = obj.nearestMrtStation
-    // const thumbnails = obj.thumbnails
+    const thumbnails = obj.thumbnails[0]
     // const firstThumbnail = thumbnails[0]
     // const thumbnailUuid = firstThumbnail["uuid"]
     const website = obj.officialWebsite
@@ -26,7 +26,7 @@ const cleanResponse = (obj) => {
 
     return {
         nearestMrtStation,
-        // thumbnailUuid,
+        thumbnails,
         website,
         name,
         address,
@@ -47,9 +47,9 @@ const cleanResponse = (obj) => {
 //     // if partyinput === couples etc, keep only "couples, romantic"
 // }
 
-const generateRandomArrayIndex = (array) => {
-    return Math.floor(Math.random() * array.length)
-}
+// const generateRandomArrayIndex = (array) => {
+//     return Math.floor(Math.random() * array.length)
+// }
 
 const Search = (props) => {
     console.log("Searching.... (render)")
@@ -63,35 +63,20 @@ const Search = (props) => {
     }, [])
 
     if (searchTerm !== "") {
-        const attractionsUrl = `https://tih-api.stb.gov.sg/content/v1/search/all?dataset=attractions&keyword=${searchTerm}&sortBy=rating&sortOrder=DESC&language=en&distinct=Yes&apikey=sLZH8hTxxGK0LPQuGnCGzH3otMafCSTI`
+        const url = `https://tih-api.stb.gov.sg/content/v1/search/all?dataset=attractions%2Cwalking_trail&keyword=${searchTerm}&sortBy=rating&sortOrder=DESC&language=en&distinct=Yes&apikey=sLZH8hTxxGK0LPQuGnCGzH3otMafCSTI`
+        const all = []
 
-        const walksUrl = `https://tih-api.stb.gov.sg/content/v1/search/all?dataset=walking_trail&keyword=${searchTerm}&sortBy=rating&sortOrder=DESC&language=en&distinct=Yes&apikey=sLZH8hTxxGK0LPQuGnCGzH3otMafCSTI`
-
-        const attractions = []
-        const walks = []
-
-        axios.get(attractionsUrl)
-            .then(function (response) {
-                const results = response.data.data.results
-                for (let i = 0; i < results.length; i++) {
-                    attractions.push(cleanResponse(results[i]))
-                }
-                console.log("inside attractions response")
-                // const test1 = generateRandomArrayIndex(attractions)
-                // const test2 = generateRandomArrayIndex(attractions)
-
-                return axios.get(walksUrl)
-            })
+        axios.get(url)
             .then(function (response) {
                 const results = response.data.data.results
 
                 for (let i = 0; i < results.length; i++) {
-                    walks.push(cleanResponse(results[i]))
+                    all.push(cleanResponse(results[i]))
                 }
-                console.log("inside attractions response")
+                console.log("inside all response")
             })
             .then(function (response) {
-                const tmpSearchResults = [attractions[4], attractions[8], walks[4]]
+                const tmpSearchResults = [all[1], all[3], all[5]]
                 if (props.searchResults.length !== tmpSearchResults.length) {
                     console.log("Not equal")
                     console.log(tmpSearchResults)

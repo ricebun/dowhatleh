@@ -2,7 +2,7 @@ import { Box, Button } from 'grommet'
 
 const Return = () => {
     const handleReturn = () => {
-
+        // clear party, avoid, searchresults
     }
 
     return (

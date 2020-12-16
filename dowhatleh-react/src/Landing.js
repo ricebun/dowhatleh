@@ -1,11 +1,9 @@
-// import { useState } from 'react'
 import { Box, Text } from "grommet"
 
 import Input from "./Input"
-import Submit from './Submit'
+import Button from './Button'
 
 const Landing = (props) => {
-
 
     return (
         <>
@@ -18,7 +16,7 @@ const Landing = (props) => {
 
                 <h1>tell me first...</h1>
                 <Input party={props.party} setParty={props.setParty} avoid={props.avoid} setAvoid={props.setAvoid} />
-                <Submit party={props.party} avoid={props.avoid} submitStatus={props.submitStatus} setSubmitStatus={props.setSubmitStatus} />
+                <Button party={props.party} avoid={props.avoid} submitStatus={props.submitStatus} setSubmitStatus={props.setSubmitStatus} clearSearchResults={props.clearSearchResults} setClearSearchResults={props.setClearSearchResults} label="Ready?" />
             </Box>
         </>
     )

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import axios from "axios"
-import isEqual from "react-fast-compare"
 
 const party = {
     "My Partner and I": ["two%20people%2Ccouples%2Cromantic"],
@@ -55,14 +54,8 @@ const generateRandomArrayIndex = (array) => {
 const Search = (props) => {
     console.log("Searching.... (render)")
     const [searchTerm, setSearchTerm] = useState("")
-    const [tmpSearchResults, setTmpSearchResults] = useState()
 
     const partyInput = props.party
-
-    // const tmpSearchResults = [] // used to setSearchResults after fully populated
-
-    // console.log(`Party = ${partyInput}`)
-    // console.log(`Search = ${party[partyInput]}`)
 
     useEffect(() => {
         console.log("setting search term - line 68")
@@ -83,11 +76,9 @@ const Search = (props) => {
                 for (let i = 0; i < results.length; i++) {
                     attractions.push(cleanResponse(results[i]))
                 }
+                console.log("inside attractions response")
                 // const test1 = generateRandomArrayIndex(attractions)
                 // const test2 = generateRandomArrayIndex(attractions)
-                // console.log(attractions[test1])
-                // tmpSearchResults.push(attractions[4])
-                // tmpSearchResults.push(attractions[8])
 
                 return axios.get(walksUrl)
             })
@@ -97,25 +88,16 @@ const Search = (props) => {
                 for (let i = 0; i < results.length; i++) {
                     walks.push(cleanResponse(results[i]))
                 }
-                // tmpSearchResults.push(walks[4])
-                // if (tmpSearchResults.length !== 3) {
-                //     pushWalks(walks, tmpSearchResults)
-                // }
+                console.log("inside attractions response")
             })
-            // .then(function (response) {
-            //     if (!deepequal(tmpSearchResults, props.searchResults)) {
-            //         console.log("setting search results - line 108")
-            //         props.setSearchResults(tmpSearchResults)
-            //     }
-            // })
             .then(function (response) {
                 const tmpSearchResults = [attractions[4], attractions[8], walks[4]]
-                if (!isEqual(props.searchResults, tmpSearchResults)) {
+                if (props.searchResults.length !== tmpSearchResults.length) {
                     console.log("Not equal")
                     console.log(tmpSearchResults)
                     console.log("setting search results - line 116")
                     props.setSearchResults(tmpSearchResults)
-                    console.log("setting search complete = true - line 118")
+                    console.log("setting search complete = true - line 121")
                     props.setSearchComplete(true)
                 }
             })
@@ -123,15 +105,6 @@ const Search = (props) => {
                 console.log(`Ahhhh something went wrong: ${error}`);
             })
     }
-
-    // useEffect(() => {
-    //     if (tmpSearchResults.length === 3 && !deepequal(props.searchResults, tmpSearchResults)) {
-    //         console.log("Not deep equal")
-    //         console.log(tmpSearchResults)
-    //         props.setSearchResults(tmpSearchResults)
-    //         props.setSearchComplete(true)
-    //     }
-    // }, [props])
 
     return (
         <>

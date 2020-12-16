@@ -1,26 +1,17 @@
 import { Box, Card, CardBody, Image, Heading, Paragraph } from "grommet"
 import { useEffect } from 'react'
-import Button from './Button'
+import GoBack from './GoBack'
 
 const ShowResults = (props) => {
     useEffect(() => {
-        props.setParty("")
-        props.setAvoid("")
+        props.props.setParty("")
+        props.props.setAvoid("")
+        // props.props.setSubmitStatus(false)
     }, [])
 
-    // const uuid0 = props.searchResults[0].thumbnails.uuid
-    // const uuid1 = props.searchResults[1].thumbnails.uuid
-    // const uuid2 = props.searchResults[2].thumbnails.uuid
-
-    const imgUrl0 = `https://tih-api.stb.gov.sg/media/v1/download/uuid/1010368e0c4b365499cab8bca05f75f7db3?apikey=sLZH8hTxxGK0LPQuGnCGzH3otMafCSTI`
-
-    const imgUrl1 = `https://tih-api.stb.gov.sg/media/v1/download/uuid/101c7e069796ec546ada96140c71fbc5f14?apikey=sLZH8hTxxGK0LPQuGnCGzH3otMafCSTI`
-
-    const imgUrl2 = `https://tih-api.stb.gov.sg/media/v1/download/uuid/101def5121ccd094cecb7b3d04617c24dfe?apikey=sLZH8hTxxGK0LPQuGnCGzH3otMafCSTI`
-
     return (
-        <>
-            {props.searchComplete ? <div>
+        <Box>
+            {props.props.searchComplete ? <div>
                 <h1>three choose one, go have fun!</h1>
                 <Box direction="row" justify="center"
                     gap="medium">
@@ -28,16 +19,16 @@ const ShowResults = (props) => {
                         <CardBody height="small">
                             <Image
                                 fit="cover"
-                                src={imgUrl0}
-                                a11yTitle={props.searchResults[0].name}
+                                src={props.props.searchResults[0].thumbnail}
+                                a11yTitle={props.props.searchResults[0].name}
                             />
                         </CardBody>
                         <Box pad={{ horizontal: 'medium' }} responsive={false}>
                             <Heading level="3" margin={{ vertical: 'medium' }}>
-                                {props.searchResults[0].name}
+                                {props.props.searchResults[0].name}
                             </Heading>
                             <Paragraph margin={{ top: 'none' }}>
-                                {props.searchResults[0].description}
+                                {props.props.searchResults[0].description}
                             </Paragraph>
                         </Box>
                     </Card>
@@ -45,16 +36,16 @@ const ShowResults = (props) => {
                         <CardBody height="small">
                             <Image
                                 fit="cover"
-                                src={imgUrl1}
+                                src={props.props.searchResults[1].thumbnail}
                                 a11yTitle="bridge"
                             />
                         </CardBody>
                         <Box pad={{ horizontal: 'medium' }} responsive={false}>
                             <Heading level="3" margin={{ vertical: 'medium' }}>
-                                {props.searchResults[1].name}
+                                {props.props.searchResults[1].name}
                             </Heading>
                             <Paragraph margin={{ top: 'none' }}>
-                                {props.searchResults[1].description}
+                                {props.props.searchResults[1].description}
                             </Paragraph>
                         </Box>
                     </Card>
@@ -62,23 +53,23 @@ const ShowResults = (props) => {
                         <CardBody height="small">
                             <Image
                                 fit="cover"
-                                src={imgUrl2}
+                                src={props.props.searchResults[2].thumbnail}
                                 a11yTitle="bridge"
                             />
                         </CardBody>
                         <Box pad={{ horizontal: 'medium' }} responsive={false}>
                             <Heading level="3" margin={{ vertical: 'medium' }}>
-                                {props.searchResults[2].name}
+                                {props.props.searchResults[2].name}
                             </Heading>
                             <Paragraph margin={{ top: 'none' }}>
-                                {props.searchResults[2].description}
+                                {props.props.searchResults[2].description}
                             </Paragraph>
                         </Box>
                     </Card>
                 </Box>
-                <Button submitStatus={props.submitStatus} setSubmitStatus={props.setSubmitStatus} setSearchResults={props.setSearchResults} label="Try again?" />
+                <GoBack setSearchResults={props.props.setSearchResults} setGoBack={props.props.setGoBack} setSubmitStatus={props.props.setSubmitStatus} label="Try again?" />
             </div> : <p>Loading..</p>}
-        </>
+        </Box>
     )
 }
 

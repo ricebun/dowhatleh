@@ -10,7 +10,12 @@ const party = {
 
 const cleanResponse = (obj) => {
     const nearestMrtStation = obj.nearestMrtStation
-    const thumbnails = obj["thumbnails"]
+    let thumbnail
+    if (obj.thumbnails[0]) {
+        thumbnail = `https://tih-api.stb.gov.sg/media/v1/download/uuid/${obj.thumbnails[0].uuid}?apikey=sLZH8hTxxGK0LPQuGnCGzH3otMafCSTI`
+    } else {
+        thumbnail = "./brokenimage.png"
+    }
     const website = obj.officialWebsite
     const name = obj.name
     const address = obj.address
@@ -24,7 +29,7 @@ const cleanResponse = (obj) => {
 
     return {
         nearestMrtStation,
-        thumbnails,
+        thumbnail,
         website,
         name,
         address,

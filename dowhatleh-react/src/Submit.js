@@ -1,6 +1,6 @@
 import { Box, Button } from "grommet"
 
-const ClickPlace = (props) => {
+const Submit = (props) => {
 
     const handleSubmit = () => {
         if (!props.submitStatus) {
@@ -18,14 +18,8 @@ const ClickPlace = (props) => {
                 console.log("Successfully submitted")
             }
         }
-        props.setSubmitStatus(!props.submitStatus)
-
-        if (!props.submitStatus) {
-            console.log("props", props)
-            // props.setSearchResults([])
-        }
+        props.setSubmitStatus(true)
     }
-
     return (
         <>
             <Box align="end">
@@ -38,4 +32,4 @@ const ClickPlace = (props) => {
     )
 }
 
-export default ClickPlace;
+export default Submit;

@@ -1,7 +1,7 @@
 import { Box, Text } from "grommet"
-
+import { useEffect } from "react"
 import Input from "./Input"
-import Button from './Button'
+import Submit from './Submit'
 
 const Landing = (props) => {
 
@@ -15,8 +15,8 @@ const Landing = (props) => {
                 </Box>
 
                 <h1>tell me first...</h1>
-                <Input party={props.party} setParty={props.setParty} avoid={props.avoid} setAvoid={props.setAvoid} />
-                <Button party={props.party} avoid={props.avoid} submitStatus={props.submitStatus} setSubmitStatus={props.setSubmitStatus} clearSearchResults={props.clearSearchResults} setClearSearchResults={props.setClearSearchResults} label="Ready?" />
+                <Input party={props.props.party} setParty={props.props.setParty} avoid={props.props.avoid} setAvoid={props.props.setAvoid} />
+                <Submit party={props.props.party} avoid={props.props.avoid} submitStatus={props.props.submitStatus} setSubmitStatus={props.props.setSubmitStatus} label="Ready?" />
             </Box>
         </>
     )

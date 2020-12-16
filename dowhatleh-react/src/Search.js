@@ -38,18 +38,34 @@ const cleanResponse = (obj) => {
     }
 }
 
+// const clearBadMatches = (obj) => {
+//     // remove type = others
+
+//     // if partyinput === one person, remove entries with "family-friendly"
+//     // loop through obj, find index of FF entries
+//     // loop through index arr, remove FF entries (splice?)
+
+//     // if partyinput === couples etc, keep only "couples, romantic"
+// }
+
+const generateRandomArrayIndex = (array) => {
+    return Math.floor(Math.random() * array.length)
+}
+
 const Search = (props) => {
     console.log("Searching....")
     const [searchTerm, setSearchTerm] = useState("")
+    const [tmpSearchResults, setTmpSearchResults] = useState()
 
     const partyInput = props.party
 
-    const tmpSearchResults = []
+    // const tmpSearchResults = [] // used to setSearchResults after fully populated
 
-    console.log(`Party = ${partyInput}`)
-    console.log(`Search = ${party[partyInput]}`)
+    // console.log(`Party = ${partyInput}`)
+    // console.log(`Search = ${party[partyInput]}`)
 
     useEffect(() => {
+        console.log("setting search term - line 68")
         setSearchTerm(party[partyInput])
     }, [])
 
@@ -67,8 +83,11 @@ const Search = (props) => {
                 for (let i = 0; i < results.length; i++) {
                     attractions.push(cleanResponse(results[i]))
                 }
-                tmpSearchResults.push(attractions[4])
-                tmpSearchResults.push(attractions[8])
+                // const test1 = generateRandomArrayIndex(attractions)
+                // const test2 = generateRandomArrayIndex(attractions)
+                // console.log(attractions[test1])
+                // tmpSearchResults.push(attractions[4])
+                // tmpSearchResults.push(attractions[8])
 
                 return axios.get(walksUrl)
             })
@@ -78,22 +97,39 @@ const Search = (props) => {
                 for (let i = 0; i < results.length; i++) {
                     walks.push(cleanResponse(results[i]))
                 }
-                tmpSearchResults.push(walks[8])
+                // tmpSearchResults.push(walks[4])
                 // if (tmpSearchResults.length !== 3) {
                 //     pushWalks(walks, tmpSearchResults)
                 // }
-
-                if (tmpSearchResults.length === 3 && !deepequal(props.searchResults, tmpSearchResults)) {
-                    console.log("Not deep equal")
-                    // console.log(tmpSearchResults)
+            })
+            .then(function (response) {
+                const tmpSearchResults = [attractions[4], attractions[8], walks[4]]
+                if (!deepequal(tmpSearchResults, props.searchResults)) {
+                    console.log("setting search results - line 108")
                     props.setSearchResults(tmpSearchResults)
-                    props.setSearchComplete(true)
                 }
             })
+            // .then(function (response) {
+            //     if (tmpSearchResults.length === 3 && !deepequal(props.searchResults, tmpSearchResults)) {
+            //         console.log("Not deep equal")
+            //         console.log(tmpSearchResults)
+            //         props.setSearchResults(tmpSearchResults)
+            //         props.setSearchComplete(true)
+            //     }
+            // })
             .catch(function (error) {
                 console.log(`Ahhhh something went wrong: ${error}`);
             })
     }
+
+    // useEffect(() => {
+    //     if (tmpSearchResults.length === 3 && !deepequal(props.searchResults, tmpSearchResults)) {
+    //         console.log("Not deep equal")
+    //         console.log(tmpSearchResults)
+    //         props.setSearchResults(tmpSearchResults)
+    //         props.setSearchComplete(true)
+    //     }
+    // }, [props])
 
     return (
         <>

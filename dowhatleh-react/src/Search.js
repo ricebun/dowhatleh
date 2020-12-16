@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from "axios"
-import deepequal from "deep-equal"
+import isEqual from "react-fast-compare"
 
 const party = {
     "My Partner and I": ["two%20people%2Ccouples%2Cromantic"],
@@ -53,7 +53,7 @@ const generateRandomArrayIndex = (array) => {
 }
 
 const Search = (props) => {
-    console.log("Searching....")
+    console.log("Searching.... (render)")
     const [searchTerm, setSearchTerm] = useState("")
     const [tmpSearchResults, setTmpSearchResults] = useState()
 
@@ -102,21 +102,23 @@ const Search = (props) => {
                 //     pushWalks(walks, tmpSearchResults)
                 // }
             })
-            .then(function (response) {
-                const tmpSearchResults = [attractions[4], attractions[8], walks[4]]
-                if (!deepequal(tmpSearchResults, props.searchResults)) {
-                    console.log("setting search results - line 108")
-                    props.setSearchResults(tmpSearchResults)
-                }
-            })
             // .then(function (response) {
-            //     if (tmpSearchResults.length === 3 && !deepequal(props.searchResults, tmpSearchResults)) {
-            //         console.log("Not deep equal")
-            //         console.log(tmpSearchResults)
+            //     if (!deepequal(tmpSearchResults, props.searchResults)) {
+            //         console.log("setting search results - line 108")
             //         props.setSearchResults(tmpSearchResults)
-            //         props.setSearchComplete(true)
             //     }
             // })
+            .then(function (response) {
+                const tmpSearchResults = [attractions[4], attractions[8], walks[4]]
+                if (!isEqual(props.searchResults, tmpSearchResults)) {
+                    console.log("Not equal")
+                    console.log(tmpSearchResults)
+                    console.log("setting search results - line 116")
+                    props.setSearchResults(tmpSearchResults)
+                    console.log("setting search complete = true - line 118")
+                    props.setSearchComplete(true)
+                }
+            })
             .catch(function (error) {
                 console.log(`Ahhhh something went wrong: ${error}`);
             })

@@ -16,9 +16,9 @@ const Submit = (props) => {
                 console.log("Error: Party not selected")
             } else {
                 console.log("Successfully submitted")
+                props.setSubmitStatus(true)
             }
         }
-        props.setSubmitStatus(true)
     }
     return (
         <>

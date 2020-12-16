@@ -27,8 +27,6 @@ const App = () => {
   const [party, setParty] = useState("")
   const [avoid, setAvoid] = useState("")
   const [submitStatus, setSubmitStatus] = useState(false)
-  const [searchResults, setSearchResults] = useState([])
-  const [searchComplete, setSearchComplete] = useState(false)
   const [goBack, setGoBack] = useState(false)
 
   const landingProps = {
@@ -41,12 +39,11 @@ const App = () => {
   }
 
   const showResultsProps = {
-    searchResults,
-    setSearchResults,
-    searchComplete,
+    party,
     setParty,
     setAvoid,
     setGoBack,
+    submitStatus,
     setSubmitStatus,
   }
 
@@ -63,15 +60,13 @@ const App = () => {
               <ShowResults props={showResultsProps} />
               {/* {goBack ? <Redirect to="/search" /> : console.log("goBack is false")} */}
             </Route>
-            {/* <Route>
+            <Route>
               <Landing props={landingProps} />
               {submitStatus ? <Redirect to="/results" /> : null}
-            </Route> */}
+            </Route>
           </Switch>
         </Router>
       </Box>
-
-      {submitStatus ? <Search party={party} searchResults={searchResults} setSearchResults={setSearchResults} setSearchComplete={setSearchComplete} setSubmitStatus={setSubmitStatus} /> : ""}
     </>
   );
 }

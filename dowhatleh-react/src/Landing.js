@@ -1,5 +1,4 @@
 import { Box, Text } from "grommet"
-import { useEffect } from "react"
 import Input from "./Input"
 import Submit from './Submit'
 

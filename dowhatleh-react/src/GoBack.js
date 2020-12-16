@@ -6,9 +6,11 @@ const GoBack = (props) => {
     const history = useHistory()
 
     const handleBack = () => {
-        props.setGoBack(true)
+        // props.setGoBack(true)
         props.setSubmitStatus(false)
         props.setSearchResults([])
+        props.setParty("")
+        props.setAvoid("")
         history.push("/search")
     }
 

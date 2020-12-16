@@ -7,10 +7,10 @@ const Landing = (props) => {
     return (
         <>
             <Box margin="medium"
-                pad="small">
+                pad="medium">
                 <h1>do what leh?</h1>
-                <Box>
-                    <Text>Welcome to my app! Use it to help you find something to do today, and go on your Singapoliday! Blah blah xxxxxx blah</Text>
+                <Box width="2/4">
+                    <Text>Welcome to my app! If you need some help finding something to do in your free time, I'm here to help! Only three choices so you don't get overwhelmed. Just pick and go :)</Text>
                 </Box>
 
                 <h1>tell me first...</h1>

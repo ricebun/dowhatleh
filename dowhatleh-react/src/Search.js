@@ -16,7 +16,13 @@ const cleanResponse = (obj) => {
     } else {
         thumbnail = "./brokenimage.png"
     }
-    const website = obj.officialWebsite
+
+    let website
+    if (obj.officialWebsite === "") {
+        website = "https://google.com.sg"
+    } else if (obj.officialWebsite.slice(0, 5) !== "https") {
+        website = `https://${obj.officialWebsite}`
+    }
     const name = obj.name
     const address = obj.address
     let location

@@ -3,24 +3,28 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect
 } from "react-router-dom";
 
 import { Grommet, Box } from "grommet";
 
 import Landing from "./Landing"
-import Search from "./Search"
 import ShowResults from './ShowResults'
 
 const theme = {
   global: {
+    background: "#FDD55B",
     font: {
       family: 'Roboto',
       size: '18px',
       height: '20px',
     },
-  },
+    colors: {
+      yellow: "#FDD55B",
+      pink: "#FFEDED"
+    },
+    full: true,
+  }
 };
 
 const App = () => {
@@ -48,8 +52,8 @@ const App = () => {
   }
 
   return (
-    <>
-      <Box fill>
+    <Grommet theme={theme}>
+      <Box fill full background="yellow" alignContent="center" className="bigbox">
         <Router>
           <Switch>
             <Route strict path="/search">
@@ -67,7 +71,7 @@ const App = () => {
           </Switch>
         </Router>
       </Box>
-    </>
+    </Grommet>
   );
 }
 

@@ -10,9 +10,7 @@ const party = {
 
 const cleanResponse = (obj) => {
     const nearestMrtStation = obj.nearestMrtStation
-    const thumbnails = obj.thumbnails[0]
-    // const firstThumbnail = thumbnails[0]
-    // const thumbnailUuid = firstThumbnail["uuid"]
+    // const thumbnails = obj["thumbnails"][0]["uuid"] // error
     const website = obj.officialWebsite
     const name = obj.name
     const address = obj.address
@@ -26,7 +24,7 @@ const cleanResponse = (obj) => {
 
     return {
         nearestMrtStation,
-        thumbnails,
+        // thumbnails,
         website,
         name,
         address,

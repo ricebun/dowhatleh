@@ -18,9 +18,10 @@ const ClickPlace = (props) => {
                 console.log("Successfully submitted")
             }
         }
-
         props.setSubmitStatus(!props.submitStatus)
-
+        if (props.submitStatus) {
+            props.setSearchResults([])
+        }
     }
 
     return (

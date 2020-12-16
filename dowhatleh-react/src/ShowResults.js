@@ -1,4 +1,4 @@
-import { Box, Card, CardBody, Image } from "grommet"
+import { Box, Card, CardBody, Image, Heading, Paragraph } from "grommet"
 import { useEffect } from 'react'
 import Button from './Button'
 
@@ -29,10 +29,17 @@ const ShowResults = (props) => {
                             <Image
                                 fit="cover"
                                 src={imgUrl0}
-                                a11yTitle="bridge"
+                                a11yTitle={props.searchResults[0].name}
                             />
                         </CardBody>
-                        <p>{props.searchResults[0].name}</p>
+                        <Box pad={{ horizontal: 'medium' }} responsive={false}>
+                            <Heading level="3" margin={{ vertical: 'medium' }}>
+                                {props.searchResults[0].name}
+                            </Heading>
+                            <Paragraph margin={{ top: 'none' }}>
+                                {props.searchResults[0].description}
+                            </Paragraph>
+                        </Box>
                     </Card>
                     <Card>
                         <CardBody height="small">
@@ -42,7 +49,14 @@ const ShowResults = (props) => {
                                 a11yTitle="bridge"
                             />
                         </CardBody>
-                        <p>{props.searchResults[1].name}</p>
+                        <Box pad={{ horizontal: 'medium' }} responsive={false}>
+                            <Heading level="3" margin={{ vertical: 'medium' }}>
+                                {props.searchResults[1].name}
+                            </Heading>
+                            <Paragraph margin={{ top: 'none' }}>
+                                {props.searchResults[1].description}
+                            </Paragraph>
+                        </Box>
                     </Card>
                     <Card>
                         <CardBody height="small">
@@ -52,7 +66,14 @@ const ShowResults = (props) => {
                                 a11yTitle="bridge"
                             />
                         </CardBody>
-                        <p>{props.searchResults[2].name}</p>
+                        <Box pad={{ horizontal: 'medium' }} responsive={false}>
+                            <Heading level="3" margin={{ vertical: 'medium' }}>
+                                {props.searchResults[2].name}
+                            </Heading>
+                            <Paragraph margin={{ top: 'none' }}>
+                                {props.searchResults[2].description}
+                            </Paragraph>
+                        </Box>
                     </Card>
                 </Box>
                 <Button submitStatus={props.submitStatus} setSubmitStatus={props.setSubmitStatus} label="Try again?" />

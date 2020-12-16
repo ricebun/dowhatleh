@@ -26,7 +26,7 @@ const App = () => {
     <>
       <Grommet theme={theme} full>
         <Box fill>
-          <Box>{submitStatus ? <ShowResults searchResults={searchResults} searchComplete={searchComplete} submitStatus={submitStatus} setSubmitStatus={setSubmitStatus} setParty={setParty} setAvoid={setAvoid} /> : <Landing party={party} setParty={setParty} avoid={avoid} setAvoid={setAvoid} submitStatus={submitStatus} setSubmitStatus={setSubmitStatus} />}</Box>
+          <Box>{submitStatus ? <ShowResults searchResults={searchResults} setSearchResults={setSearchResults} searchComplete={searchComplete} submitStatus={submitStatus} setSubmitStatus={setSubmitStatus} setParty={setParty} setAvoid={setAvoid} /> : <Landing party={party} setParty={setParty} avoid={avoid} setAvoid={setAvoid} submitStatus={submitStatus} setSubmitStatus={setSubmitStatus} />}</Box>
         </Box>
       </Grommet>
       {submitStatus ? <Search party={party} searchResults={searchResults} setSearchResults={setSearchResults} setSearchComplete={setSearchComplete} submitStatus={submitStatus} /> : ""}

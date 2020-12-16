@@ -76,7 +76,7 @@ const ShowResults = (props) => {
                         </Box>
                     </Card>
                 </Box>
-                <Button submitStatus={props.submitStatus} setSubmitStatus={props.setSubmitStatus} label="Try again?" />
+                <Button submitStatus={props.submitStatus} setSubmitStatus={props.setSubmitStatus} setSearchResults={props.setSearchResults} label="Try again?" />
             </div> : <p>Loading..</p>}
         </>
     )

@@ -19,8 +19,10 @@ const ClickPlace = (props) => {
             }
         }
         props.setSubmitStatus(!props.submitStatus)
-        if (props.submitStatus) {
-            props.setSearchResults([])
+
+        if (!props.submitStatus) {
+            console.log("props", props)
+            // props.setSearchResults([])
         }
     }
 

@@ -24,7 +24,7 @@ const Search = (props) => {
     useEffect(() => {
         console.log("setting search term - line 68")
         setSearchTerm(party[partyInput])
-    }, [])
+    }, [partyInput])
 
     const cleanResponse = (obj) => {
         const nearestMrtStation = obj.nearestMrtStation

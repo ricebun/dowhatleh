@@ -31,7 +31,6 @@ const App = () => {
   const [party, setParty] = useState("")
   const [avoid, setAvoid] = useState("")
   const [submitStatus, setSubmitStatus] = useState(false)
-  const [goBack, setGoBack] = useState(false)
 
   const landingProps = {
     party,
@@ -47,7 +46,6 @@ const App = () => {
     setParty,
     avoid,
     setAvoid,
-    setGoBack,
     submitStatus,
     setSubmitStatus,
   }

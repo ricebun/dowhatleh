@@ -1,4 +1,4 @@
-import { Box } from "grommet"
+import { Box, Heading } from "grommet"
 import { useState } from 'react'
 import Search from "./Search"
 import GoBack from './GoBack'
@@ -12,11 +12,11 @@ const ShowResults = (props) => {
         <>
             { props.props.submitStatus ? <Search party={props.props.party} avoid={props.props.avoid} searchResults={searchResults} setSearchResults={setSearchResults} setSearchComplete={setSearchComplete} /> : ""}
 
-            <Box margin="medium"
-                pad="small"
-                gap="medium">
+            <Box pad="small"
+                gap="medium"
+                margin={{ "top": "small", "left": "medium", "right": "medium" }}>
                 {searchComplete ? <div>
-                    <h1>three choose one, go have fun!</h1>
+                    <Heading margin={{ "bottom": "large" }}>three choose one, go have fun!</Heading>
                     <Box direction="row" justify="center"
                         gap="medium" border={{ size: "small", color: "yellow" }}>
                         <ResultCard result={searchResults[0]} />

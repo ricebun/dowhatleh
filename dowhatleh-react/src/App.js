@@ -54,7 +54,7 @@ const App = () => {
 
   return (
     <Grommet theme={theme}>
-      <Box fill full background="yellow" alignContent="center" className="bigbox">
+      <Box height="100vh" full background="yellow" alignContent="center" className="bigbox">
         <Router>
           <Switch>
             <Route strict path="/search">

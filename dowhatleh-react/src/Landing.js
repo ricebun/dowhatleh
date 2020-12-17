@@ -1,4 +1,4 @@
-import { Box, Text } from "grommet"
+import { Box, Text, Heading } from "grommet"
 import Input from "./Input"
 import Submit from './Submit'
 
@@ -6,14 +6,15 @@ const Landing = (props) => {
 
     return (
         <>
-            <Box margin="medium"
-                pad="medium">
-                <h1>do what leh?</h1>
+            <Box margin={{ "top": "small", "left": "medium", "right": "medium" }}
+                pad="medium"
+                fill>
+                <Heading>do what leh?</Heading>
                 <Box width="2/4">
                     <Text>Welcome to my app! If you need some help finding something to do in your free time, I'm here to help! Only three choices so you don't get overwhelmed. Just pick and get going :)</Text>
                 </Box>
 
-                <h1>tell me first...</h1>
+                <Heading margin={{ "top": "large" }}>tell me first...</Heading>
                 <Input party={props.props.party} setParty={props.props.setParty} avoid={props.props.avoid} setAvoid={props.props.setAvoid} />
                 <Submit party={props.props.party} avoid={props.props.avoid} submitStatus={props.props.submitStatus} setSubmitStatus={props.props.setSubmitStatus} label="Ready?" />
             </Box>

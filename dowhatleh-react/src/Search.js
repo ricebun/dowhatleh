@@ -72,7 +72,7 @@ const Search = (props) => {
 
     const clearBadMatches = (arr) => {
         for (let i = 0; i < arr.length; i++) {
-            if (arr[i].type.includes("Others") || arr[i].type.includes("Gelam")) {
+            if (arr[i].type.includes("Others") || arr[i].name.includes("Gelam")) {
                 arr.splice(i, 1)
             } else {
                 const target = arr[i].type

@@ -1,4 +1,4 @@
-import { Box, Card, Image, Heading, Button } from 'grommet'
+import { Box, Card, Image, Heading, Button, Footer } from 'grommet'
 
 
 const ResultCard = (props) => {
@@ -21,9 +21,8 @@ const ResultCard = (props) => {
                     </Heading>
 
                 </Box>
-                <Box direction="row" pad={{ horizontal: 'medium', vertical: 'small' }} justify="end" align="end" gridArea="button">
-                    {/* <Anchor href={props.result.website} label="Visit Website" /> */}
-                    <Button alignSelf="end" label="Visit Website" onClick={() => redirect()}></Button>
+                <Box direction="row" pad={{ horizontal: 'medium', vertical: 'small' }} justify="end" alignSelf="end" gridArea="button">
+                    <Footer fixed={true}><Button alignSelf="end" label="Visit Website" onClick={() => redirect()}></Button></Footer>
                 </Box>
             </Card>
         </>

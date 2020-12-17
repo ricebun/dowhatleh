@@ -1,4 +1,4 @@
-import { Box, Card, CardBody, Image, Heading, Paragraph } from "grommet"
+import { Box } from "grommet"
 import { useState } from 'react'
 import Search from "./Search"
 import GoBack from './GoBack'
@@ -10,7 +10,7 @@ const ShowResults = (props) => {
 
     return (
         <>
-            { props.props.submitStatus ? <Search party={props.props.party} searchResults={searchResults} setSearchResults={setSearchResults} setSearchComplete={setSearchComplete} /> : ""}
+            { props.props.submitStatus ? <Search party={props.props.party} avoid={props.props.avoid} searchResults={searchResults} setSearchResults={setSearchResults} setSearchComplete={setSearchComplete} /> : ""}
 
             <Box margin="medium"
                 pad="small"

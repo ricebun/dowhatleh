@@ -45,6 +45,7 @@ const App = () => {
   const showResultsProps = {
     party,
     setParty,
+    avoid,
     setAvoid,
     setGoBack,
     submitStatus,

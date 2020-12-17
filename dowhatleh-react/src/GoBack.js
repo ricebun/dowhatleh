@@ -17,7 +17,7 @@ const GoBack = (props) => {
     return (
         <>
             <Box align="center" margin="medium" height="xxsmall" border={{ size: "small", color: "yellow" }}>
-                <Button primary plain="true"
+                <Button primary plain
                     fill="vertical"
                     label={props.label}
                     onClick={() => handleBack()} ></Button>

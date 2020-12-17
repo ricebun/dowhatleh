@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import axios from "axios"
 
+import ChooseThree from "./ChooseThree"
+
 const party = {
     "My Partner and I": ["two%20people%2Ccouples%2Cromantic"],
     "Just Me": ["one%20person"],
@@ -8,61 +10,14 @@ const party = {
     "Family": ["families%2Cfamily-friendly"]
 }
 
-const cleanResponse = (obj) => {
-    const nearestMrtStation = obj.nearestMrtStation
-    let thumbnail
-    if (obj.thumbnails[0]) {
-        thumbnail = `https://tih-api.stb.gov.sg/media/v1/download/uuid/${obj.thumbnails[0].uuid}?apikey=sLZH8hTxxGK0LPQuGnCGzH3otMafCSTI`
-    } else {
-        thumbnail = "./brokenimage.png"
-    }
-
-    let website
-    if (obj.officialWebsite === "") {
-        website = "https://google.com.sg"
-    } else if (obj.officialWebsite.slice(0, 5) !== "https") {
-        website = `https://${obj.officialWebsite}`
-    }
-    const name = obj.name
-    const address = obj.address
-    let location
-    if (obj.location) {
-        location = [obj.location.latitude, obj.location.longitude]
-    }
-    const tags = obj.tags
-    const description = obj.description
-    const type = obj.type
-
-    return {
-        nearestMrtStation,
-        thumbnail,
-        website,
-        name,
-        address,
-        location,
-        tags,
-        description,
-        type,
-    }
+const generateRandomArrayIndex = (array) => {
+    return Math.floor(Math.random() * array.length)
 }
-
-// const clearBadMatches = (obj) => {
-//     // remove type = others
-
-//     // if partyinput === one person, remove entries with "family-friendly"
-//     // loop through obj, find index of FF entries
-//     // loop through index arr, remove FF entries (splice?)
-
-//     // if partyinput === couples etc, keep only "couples, romantic"
-// }
-
-// const generateRandomArrayIndex = (array) => {
-//     return Math.floor(Math.random() * array.length)
-// }
 
 const Search = (props) => {
     console.log("Searching.... (render)")
     const [searchTerm, setSearchTerm] = useState("")
+    // const [tmpSearchResults, setTmpSearchResults] = useState([])
 
     const partyInput = props.party
 
@@ -71,9 +26,62 @@ const Search = (props) => {
         setSearchTerm(party[partyInput])
     }, [])
 
+    const cleanResponse = (obj) => {
+        const nearestMrtStation = obj.nearestMrtStation
+        let thumbnail
+        if (obj.thumbnails[0]) {
+            thumbnail = `https://tih-api.stb.gov.sg/media/v1/download/uuid/${obj.thumbnails[0].uuid}?apikey=sLZH8hTxxGK0LPQuGnCGzH3otMafCSTI`
+        } else {
+            thumbnail = "https://static.thenounproject.com/png/1583624-200.png"
+        }
+        let website
+        if (obj.officialWebsite === "") {
+            website = "https://google.com.sg"
+        } else if (obj.officialWebsite.slice(0, 5) !== "https") {
+            website = `https://${obj.officialWebsite}`
+        }
+        const name = obj.name
+        const address = obj.address
+        let location
+        if (obj.location) {
+            location = [obj.location.latitude, obj.location.longitude]
+        }
+        const tags = obj.tags
+        const description = obj.description
+        const type = obj.type
+
+        return {
+            nearestMrtStation,
+            thumbnail,
+            website,
+            name,
+            address,
+            location,
+            tags,
+            description,
+            type,
+        }
+    }
+
+    const clearBadMatches = (arr) => {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].type.toLowerCase().includes("others")) {
+                arr.splice(i, 1)
+            }
+            for (let j = 0; j < props.avoid.length; j++) {
+                if (arr[i].type.includes(props.avoid)) {
+                    arr.splice(i, 1)
+                    console.log("checking avoid")
+                }
+            }
+        }
+        return arr
+    }
+
     if (searchTerm !== "") {
         const url = `https://tih-api.stb.gov.sg/content/v1/search/all?dataset=attractions%2Cwalking_trail&keyword=${searchTerm}&sortBy=rating&sortOrder=DESC&language=en&distinct=Yes&apikey=sLZH8hTxxGK0LPQuGnCGzH3otMafCSTI`
-        const all = []
+        let all = []
+        let tmpSearchResults = []
 
         axios.get(url)
             .then(function (response) {
@@ -82,10 +90,27 @@ const Search = (props) => {
                 for (let i = 0; i < results.length; i++) {
                     all.push(cleanResponse(results[i]))
                 }
-                console.log("inside all response")
+                // console.log(all)
+                all = clearBadMatches(all)
+                // console.log("inside all response")
+                console.log(all)
+                console.log(all.length)
+                // for (let i = 0; i < all.length; i++) {
+                //     console.log(all[i].type)
+                // }
             })
-            .then(function (response) {
-                const tmpSearchResults = [all[1], all[3], all[5]]
+            .then(function () {
+                console.log("hello")
+                let num1, num2, num3
+                do {
+                    num1 = generateRandomArrayIndex(all)
+                    num2 = generateRandomArrayIndex(all)
+                    num3 = generateRandomArrayIndex(all)
+                } while (num1 === num2 || num1 === num3 || num2 === num3)
+                tmpSearchResults = [all[num1], all[num2], all[num3]]
+                console.log(num1, num2, num3)
+            })
+            .then(function () {
                 if (props.searchResults.length !== tmpSearchResults.length) {
                     console.log("Not equal")
                     console.log(tmpSearchResults)

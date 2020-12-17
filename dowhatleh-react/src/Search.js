@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from "axios"
 
-import ChooseThree from "./ChooseThree"
+const APIKEY = process.env.REACT_APP_APIKEY
 
 const party = {
     "My Partner and I": ["two%20people%2Ccouples%2Cromantic"],
@@ -28,18 +28,25 @@ const Search = (props) => {
 
     const cleanResponse = (obj) => {
         const nearestMrtStation = obj.nearestMrtStation
+
         let thumbnail
-        if (obj.thumbnails[0]) {
-            thumbnail = `https://tih-api.stb.gov.sg/media/v1/download/uuid/${obj.thumbnails[0].uuid}?apikey=sLZH8hTxxGK0LPQuGnCGzH3otMafCSTI`
+        if (obj.thumbnails[0] && obj.thumbnails[0].uuid !== "") {
+            thumbnail = `https://tih-api.stb.gov.sg/media/v1/download/uuid/${obj.thumbnails[0].uuid}?apikey=${APIKEY}`
+        } else if (obj.thumbnails[0] && obj.thumbnails[0].uuid === "" && obj.thumbnails.url !== "") {
+            thumbnail = obj.thumbnails[0].url
         } else {
             thumbnail = "https://static.thenounproject.com/png/1583624-200.png"
         }
+
         let website
-        if (obj.officialWebsite === "") {
+        if (obj.officialWebsite === "" || obj.officialWebsite === undefined) {
             website = "https://google.com.sg"
         } else if (obj.officialWebsite.slice(0, 5) !== "https") {
             website = `https://${obj.officialWebsite}`
+        } else {
+            website = obj.officialWebsite
         }
+
         const name = obj.name
         const address = obj.address
         let location
@@ -65,13 +72,14 @@ const Search = (props) => {
 
     const clearBadMatches = (arr) => {
         for (let i = 0; i < arr.length; i++) {
-            if (arr[i].type.toLowerCase().includes("others")) {
+            if (arr[i].type.includes("Others") || arr[i].type.includes("Gelam")) {
                 arr.splice(i, 1)
-            }
-            for (let j = 0; j < props.avoid.length; j++) {
-                if (arr[i].type.includes(props.avoid)) {
-                    arr.splice(i, 1)
-                    console.log("checking avoid")
+            } else {
+                const target = arr[i].type
+                for (let j = 0; j < props.avoid.length; j++) {
+                    if (target === props.avoid[j]) {
+                        arr.splice(i, 1)
+                    }
                 }
             }
         }
@@ -79,7 +87,7 @@ const Search = (props) => {
     }
 
     if (searchTerm !== "") {
-        const url = `https://tih-api.stb.gov.sg/content/v1/search/all?dataset=attractions%2Cwalking_trail&keyword=${searchTerm}&sortBy=rating&sortOrder=DESC&language=en&distinct=Yes&apikey=sLZH8hTxxGK0LPQuGnCGzH3otMafCSTI`
+        const url = `https://tih-api.stb.gov.sg/content/v1/search/all?dataset=attractions%2Cwalking_trail&keyword=${searchTerm}&sortBy=rating&sortOrder=DESC&language=en&distinct=Yes&apikey=${APIKEY}`
         let all = []
         let tmpSearchResults = []
 
@@ -90,17 +98,10 @@ const Search = (props) => {
                 for (let i = 0; i < results.length; i++) {
                     all.push(cleanResponse(results[i]))
                 }
-                // console.log(all)
-                all = clearBadMatches(all)
-                // console.log("inside all response")
                 console.log(all)
-                console.log(all.length)
-                // for (let i = 0; i < all.length; i++) {
-                //     console.log(all[i].type)
-                // }
+                all = clearBadMatches(all)
             })
             .then(function () {
-                console.log("hello")
                 let num1, num2, num3
                 do {
                     num1 = generateRandomArrayIndex(all)

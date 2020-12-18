@@ -13,8 +13,8 @@ const ShowResults = (props) => {
             { props.props.submitStatus ? <Search party={props.props.party} avoid={props.props.avoid} searchResults={searchResults} setSearchResults={setSearchResults} setSearchComplete={setSearchComplete} /> : ""}
 
             <Box pad="small"
-                gap="medium"
-                margin={{ "top": "small", "left": "medium", "right": "medium" }}
+                gap="small"
+                margin={{ "top": "xsmall", "left": "medium", "right": "medium" }}
                 justify="center">
                 {searchComplete ? <div>
                     <Heading margin={{ "bottom": "medium" }}>three choose one, go have fun!</Heading>

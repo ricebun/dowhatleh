@@ -16,7 +16,7 @@ const GoBack = (props) => {
 
     return (
         <>
-            <Box align="center" margin="medium" height="xxsmall">
+            <Box align="center" margin={{ "top": "medium", "bottom": "small" }} height="xxsmall">
                 <Button primary
                     fill="vertical"
                     label={props.label}

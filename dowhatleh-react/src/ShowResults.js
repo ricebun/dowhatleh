@@ -16,7 +16,7 @@ const ShowResults = (props) => {
                 gap="medium"
                 margin={{ "top": "small", "left": "medium", "right": "medium" }}>
                 {searchComplete ? <div>
-                    <Heading margin={{ "bottom": "large" }}>three choose one, go have fun!</Heading>
+                    <Heading margin={{ "bottom": "medium" }}>three choose one, go have fun!</Heading>
                     <Box direction="row" justify="center"
                         gap="medium" border={{ size: "small", color: "yellow" }}>
                         <ResultCard result={searchResults[0]} />

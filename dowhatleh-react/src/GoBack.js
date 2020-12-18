@@ -16,7 +16,7 @@ const GoBack = (props) => {
 
     return (
         <>
-            <Box align="center" margin="medium" height="xxsmall" border={{ size: "small", color: "yellow" }}>
+            <Box align="center" margin="medium" height="xxsmall">
                 <Button primary
                     fill="vertical"
                     label={props.label}

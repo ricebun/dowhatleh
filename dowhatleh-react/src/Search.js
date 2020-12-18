@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from "axios"
 
-const APIKEY = process.env.REACT_APP_APIKEY
-
 const party = {
     "My Partner and I": ["two%20people%2Ccouples%2Cromantic"],
     "Just Me": ["one%20person"],
@@ -31,7 +29,7 @@ const Search = (props) => {
 
         let thumbnail
         if (obj.thumbnails[0] && obj.thumbnails[0].uuid !== "") {
-            thumbnail = `https://tih-api.stb.gov.sg/media/v1/download/uuid/${obj.thumbnails[0].uuid}?apikey=${APIKEY}`
+            thumbnail = `https://tih-api.stb.gov.sg/media/v1/download/uuid/${obj.thumbnails[0].uuid}?apikey=sLZH8hTxxGK0LPQuGnCGzH3otMafCSTI`
         } else if (obj.thumbnails[0] && obj.thumbnails[0].uuid === "" && obj.thumbnails.url !== "") {
             thumbnail = obj.thumbnails[0].url
         } else {
@@ -87,7 +85,7 @@ const Search = (props) => {
     }
 
     if (searchTerm !== "") {
-        const url = `https://tih-api.stb.gov.sg/content/v1/search/all?dataset=attractions%2Cwalking_trail&keyword=${searchTerm}&sortBy=rating&sortOrder=DESC&language=en&distinct=Yes&apikey=${APIKEY}`
+        const url = `https://tih-api.stb.gov.sg/content/v1/search/all?dataset=attractions%2Cwalking_trail&keyword=${searchTerm}&sortBy=rating&sortOrder=DESC&language=en&distinct=Yes&apikey=sLZH8hTxxGK0LPQuGnCGzH3otMafCSTI`
         let all = []
         let tmpSearchResults = []
 

@@ -14,7 +14,8 @@ const ShowResults = (props) => {
 
             <Box pad="small"
                 gap="medium"
-                margin={{ "top": "small", "left": "medium", "right": "medium" }}>
+                margin={{ "top": "small", "left": "medium", "right": "medium" }}
+                justify="center">
                 {searchComplete ? <div>
                     <Heading margin={{ "bottom": "medium" }}>three choose one, go have fun!</Heading>
                     <Box direction="row" justify="center"

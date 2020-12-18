@@ -8,7 +8,7 @@ const ResultCard = (props) => {
 
     return (
         <>
-            <Card height="medium" width="medium" background="pink" pad="small">
+            <Card height="medium" width="medium" background="pink" pad="small" justify="center">
                 <Box height="1/2" round="small" gridArea="image">
                     <Image
                         fit="contain"

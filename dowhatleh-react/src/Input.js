@@ -14,25 +14,33 @@ const Input = (props) => {
                 justify="center"
                 gap="medium">
                 <Box background="pink"
-                    pad="small">
-                    <Text>Who's Coming?</Text>
+                    pad="small"
+                    height="small"
+                    justify="center"
+                    round="small"
+                    elevation="small">
+                    <Text textAlign="center" margin="xxsmall">Who's Coming?</Text>
                     <Box>
                         <Select
                             options={["My Partner and I", "Friends", "Family", "Just Me"]}
                             value={props.party}
                             onChange={(e) => handleSelection(e, props.setParty)}
-                            placeholder="Who's coming?"
+                            placeholder="Choose one"
                         />
                     </Box>
                 </Box>
                 <Box background="pink"
-                    pad="small">
-                    <Text>Things you don't want to do</Text>
+                    pad="small"
+                    height="small"
+                    justify="center"
+                    round="small"
+                    elevation="small">
+                    <Text textAlign="center" margin="xxsmall">Things you don't want to do</Text>
                     <Select
                         options={["History & Culture", "Adventure", "Leisure & Recreation", "Nature & Wildlife", "Sightseeing", "See & Do"]}
                         value={props.avoid}
                         onChange={(e) => handleSelection(e, props.setAvoid)}
-                        placeholder="Things you don't want to do"
+                        placeholder="Choose as many"
                         multiple
                     />
                 </Box>

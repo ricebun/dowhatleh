@@ -22,7 +22,7 @@ const Submit = (props) => {
     }
     return (
         <>
-            <Box align="center" margin="small" height="xxsmall" border={{ size: "small", color: "yellow" }}>
+            <Box align="center" margin={{ "top": "medium", "bottom": "small" }} height="xxsmall">
                 <Button primary
                     fill="vertical"
                     label={props.label}

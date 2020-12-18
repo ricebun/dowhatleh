@@ -12,7 +12,8 @@ const Input = (props) => {
         <>
             <Box direction="row"
                 justify="center"
-                gap="medium">
+                gap="medium"
+                margin={{ "top": "xxxsmall" }}>
                 <Box background="pink"
                     pad="small"
                     height="small"

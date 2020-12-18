@@ -16,7 +16,7 @@ const Landing = (props) => {
                     <Text>Welcome to my app! If you need some help finding something to do in your free time, I'm here to help! Only three choices so you don't get overwhelmed. Just pick and get going :)</Text>
                 </Box>
 
-                <Heading margin={{ "top": "large" }}>tell me first...</Heading>
+                <Heading margin={{ "top": "large", "bottom": "small" }}>tell me first...</Heading>
                 <Input party={props.props.party} setParty={props.props.setParty} avoid={props.props.avoid} setAvoid={props.props.setAvoid} />
                 <Submit party={props.props.party} avoid={props.props.avoid} submitStatus={props.props.submitStatus} setSubmitStatus={props.props.setSubmitStatus} label="Ready?" />
             </Box>

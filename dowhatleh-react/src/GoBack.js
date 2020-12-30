@@ -19,7 +19,7 @@ const GoBack = (props) => {
             <Box align="center" margin={{ "top": "medium", "bottom": "small" }} height="xxsmall">
                 <Button primary
                     fill="vertical"
-                    label={props.label}
+                    label="Go Back and Try Again"
                     onClick={() => handleBack()} ></Button>
             </Box>
         </>

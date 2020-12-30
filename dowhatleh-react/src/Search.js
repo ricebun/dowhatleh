@@ -85,19 +85,36 @@ const Search = (props) => {
     }
 
     if (searchTerm !== "") {
-        const url = `https://tih-api.stb.gov.sg/content/v1/search/all?dataset=attractions%2Cwalking_trail&keyword=${searchTerm}&sortBy=rating&sortOrder=DESC&language=en&distinct=Yes&apikey=sLZH8hTxxGK0LPQuGnCGzH3otMafCSTI`
+        let url
         let all = []
         let tmpSearchResults = []
+        let tmpNextToken = 'ABC'
+
+        if (props.regen) {
+            url = `https://tih-api.stb.gov.sg/content/v1/search/all?dataset=attractions%2Cwalking_trail&keyword=${searchTerm}&sortBy=rating&sortOrder=DESC&language=en&distinct=Yes&apikey=sLZH8hTxxGK0LPQuGnCGzH3otMafCSTI&nextToken=${props.nextToken}`
+        } else {
+            url = `https://tih-api.stb.gov.sg/content/v1/search/all?dataset=attractions%2Cwalking_trail&keyword=${searchTerm}&sortBy=rating&sortOrder=DESC&language=en&distinct=Yes&apikey=sLZH8hTxxGK0LPQuGnCGzH3otMafCSTI`
+        }
 
         axios.get(url)
             .then(function (response) {
                 const results = response.data.data.results
+                const nextTokenResult = response.data.nextToken
 
                 for (let i = 0; i < results.length; i++) {
                     all.push(cleanResponse(results[i]))
                 }
                 console.log(all)
                 all = clearBadMatches(all)
+
+                tmpNextToken = ''
+                for (let i = 0; i < nextTokenResult.length; i++) {
+                    if (nextTokenResult[i] === '=') {
+                        tmpNextToken += '%3D'
+                    } else {
+                        tmpNextToken += nextTokenResult[i]
+                    }
+                }
             })
             .then(function () {
                 let num1, num2, num3
@@ -110,13 +127,19 @@ const Search = (props) => {
                 console.log(num1, num2, num3)
             })
             .then(function () {
-                if (props.searchResults.length !== tmpSearchResults.length) {
+                if (props.searchResults.length !== tmpSearchResults.length || props.regen) {
                     console.log("Not equal")
                     console.log(tmpSearchResults)
-                    console.log("setting search results - line 116")
+                    console.log("setting search results")
                     props.setSearchResults(tmpSearchResults)
-                    console.log("setting search complete = true - line 121")
+                    console.log("setting nextToken results")
+                    props.setNextToken(tmpNextToken)
+                    console.log("setting search complete = true")
                     props.setSearchComplete(true)
+                    if (props.regen) {
+                        console.log("setting regen = false")
+                        props.setRegen(false)
+                    }
                 }
             })
             .catch(function (error) {

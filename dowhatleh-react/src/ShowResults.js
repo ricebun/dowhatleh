@@ -3,14 +3,18 @@ import { useState } from 'react'
 import Search from "./Search"
 import GoBack from './GoBack'
 import ResultCard from './ResultCard'
+import Regenerate from './Regenerate'
 
 const ShowResults = (props) => {
     const [searchResults, setSearchResults] = useState([])
     const [searchComplete, setSearchComplete] = useState(false)
+    const [nextToken, setNextToken] = useState('')
+    const [regen, setRegen] = useState(false)
 
     return (
         <>
-            { props.props.submitStatus ? <Search party={props.props.party} avoid={props.props.avoid} searchResults={searchResults} setSearchResults={setSearchResults} setSearchComplete={setSearchComplete} /> : ""}
+            { props.props.submitStatus ? <Search party={props.props.party} avoid={props.props.avoid} searchResults={searchResults} setSearchResults={setSearchResults} setSearchComplete={setSearchComplete} nextToken={nextToken} setNextToken={setNextToken} /> : null}
+            { regen ? <Search party={props.props.party} avoid={props.props.avoid} searchResults={searchResults} setSearchResults={setSearchResults} setSearchComplete={setSearchComplete} regen={regen} setRegen={setRegen} nextToken={nextToken} setNextToken={setNextToken} /> : null}
 
             <Box pad="small"
                 gap="small"
@@ -24,7 +28,8 @@ const ShowResults = (props) => {
                         <ResultCard result={searchResults[1]} />
                         <ResultCard result={searchResults[2]} />
                     </Box>
-                    <GoBack setSearchResults={setSearchResults} setGoBack={props.props.setGoBack} setSubmitStatus={props.props.setSubmitStatus} setParty={props.props.setParty} setAvoid={props.props.setAvoid} label="Try again?" />
+                    <GoBack setSearchResults={setSearchResults} setGoBack={props.props.setGoBack} setSubmitStatus={props.props.setSubmitStatus} setParty={props.props.setParty} setAvoid={props.props.setAvoid} />
+                    <Regenerate regen={regen} setRegen={setRegen} />
                 </div> : <p>Loading..</p>}
             </Box>
         </>
